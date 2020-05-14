@@ -53,6 +53,35 @@ wwc <- read_csv("data/worldwidecases.csv")
 ```
 
 \section*{Country XX1 and YY1"}
+```{r table1}
+wwc %>%
+  filter(countriesAndTerritories == "India" | countriesAndTerritories == "China") %>%
+  rename(country = countriesAndTerritories) %>%
+  group_by(country) %>%
+  summarise(deaths = sum(deaths),
+            cases = sum(cases),
+            ) %>%
+  kable(col.names = c("Countries",
+                           "Deaths",
+                           "Cases"), caption = 'Total cases at the time of this report.') %>%
+  kable_styling()
+
+```
+
+The Table \@ref(table:table1)) shows that China has far more deaths and total number of cases compared to India
+
+```{r figure1}
+wwc %>%
+  filter(countriesAndTerritories == "India" | countriesAndTerritories == "China",
+         year == 2020) %>%
+  rename(country = countriesAndTerritories) %>%
+  ggplot(aes(x = month, y = deaths, color = country)) +
+  geom_smooth() +
+  facet_wrap(~country) +
+  theme_minimal() +
+  ggtitle("Relationship between total cases and total deaths")
+```
+The Figure \@ref(fig:figure1)) show that while the Total number of cases in China are far superior, the death count is very much on a decline since February, while the death count in India has been increase quite rapidly since March.
 
 \section*{Country XX2 and YY2}
 
