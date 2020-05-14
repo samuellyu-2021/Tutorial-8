@@ -58,5 +58,24 @@ wwc <- read_csv("data/worldwidecases.csv")
 
 \section*{Country XX3 and YY3}
 
+Filter the dataset to present the countries of interest: 
+  - France
+  - Sweden
+```{r filter-countries}
+France <- wwc %>%
+  filter(countriesAndTerritories == "france")
+
+Sweden <- wwc %>%
+  filter(countriesAndTerritories == "sweden") 
+```
+
+
+
+
+
+
+
+
+
 
 
