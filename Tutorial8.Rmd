@@ -115,7 +115,7 @@ table_france
 
 
 
-Plot the cases by dateRep
+Table for sweden
 ```{r table-sweden-deaths-cases}
 table_sweden <- Sweden %>% 
   select(dateRep, cases, deaths) %>%
