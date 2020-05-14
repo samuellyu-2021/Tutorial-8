@@ -62,20 +62,38 @@ Filter the dataset to present the countries of interest:
   - France
   - Sweden
 ```{r filter-countries}
-France <- wwc %>%
-  filter(countriesAndTerritories == "france")
+france_and_sweden <- wwc %>%
+  filter(countriesAndTerritories %in% c("France", "Sweden"))
+         
+```
 
-Sweden <- wwc %>%
-  filter(countriesAndTerritories == "sweden") 
+Figure for countries
+```{r glimpse-of-countries}
+glimpse(france_and_sweden)
+```
+
+Table for France
+```{r table-france}
+table_france <- France %>%
+  select(dateRep, cases, deaths) %>%
+  arrange(desc(deaths)) %>%
+  kable(caption = "Table showing the dates with higest number of confirmed cases and deaths for France") %>%
+  kable_styling(bootstrap_options = c("hover", "striped"))
+table_france
 ```
 
 
 
+Plot the cases by dateRep
+```{r table-sweden-deaths-cases}
+table_sweden <- Sweden %>% 
+  select(dateRep, cases, deaths) %>%
+  arrange(desc(deaths)) %>%
+  kable(caption = "Table showing the dates with higest number of confirmed cases and deaths for Sweden") %>%
+  kable_styling(bootstrap_options = c("hover", "striped"))
+table_sweden
+```
 
-
-
-
-
-
+Plot most 
 
 
