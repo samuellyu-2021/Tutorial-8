@@ -54,9 +54,34 @@ wwc <- read_csv("data/worldwidecases.csv")
 
 \section*{Country XX1 and YY1"}
 
-\section*{Country XX2 and YY2}
+\section*{Country: US and UK}
 
-\section*{Country XX3 and YY3}
+``` {r}
+world <- read_csv("Data/worldwidecases.csv")
+
+
+USUK <- world %>% filter (countryterritoryCode %in% c("USA", "GBR"))
+
+
+```
+
+``` {r fig1, fig.cap: "Deaths in the US and UK in April" }
+
+plot1 <- USUK %>% filter(month == "4") %>% group_by(day, geoId, deaths) %>% summarise() %>%
+ggplot(aes(x=day, y=deaths)) +
+  geom_line()+
+  facet_grid(~geoId)
+plot1
+```
+Figure \@ref(fig:fig1) illustrates the number of death per day in the US and UK in April. The death tolls in US climb sharply to peak at nearly 5000 cases in mid April. In constrast, death cases number in UK stay relatively stable  
+
+```{r tab1}
+tab1 <- USUK %>% filter(month == "5") %>% group_by(day, geoId, deaths) %>% summarise() %>%
+pivot_wider(names_from = geoId, values_from = deaths) %>%
+kable(caption = "Number of deaths in US and UK in May")
+```
+ Table \@ref(tab:tab1) shows the number of deaths in US and UK in May.
+
 
 
 
