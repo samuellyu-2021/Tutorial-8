@@ -53,6 +53,35 @@ wwc <- read_csv("data/worldwidecases.csv")
 ```
 
 \section*{Country XX1 and YY1"}
+```{r table1}
+wwc %>%
+  filter(countriesAndTerritories == "India" | countriesAndTerritories == "China") %>%
+  rename(country = countriesAndTerritories) %>%
+  group_by(country) %>%
+  summarise(deaths = sum(deaths),
+            cases = sum(cases),
+            ) %>%
+  kable(col.names = c("Countries",
+                           "Deaths",
+                           "Cases"), caption = 'Total cases at the time of this report.') %>%
+  kable_styling()
+
+```
+
+The Table \@ref(table:table1)) shows that China has far more deaths and total number of cases compared to India
+
+```{r figure1}
+wwc %>%
+  filter(countriesAndTerritories == "India" | countriesAndTerritories == "China",
+         year == 2020) %>%
+  rename(country = countriesAndTerritories) %>%
+  ggplot(aes(x = month, y = deaths, color = country)) +
+  geom_smooth() +
+  facet_wrap(~country) +
+  theme_minimal() +
+  ggtitle("Relationship between total cases and total deaths")
+```
+The Figure \@ref(fig:figure1)) show that while the Total number of cases in China are far superior, the death count is very much on a decline since February, while the death count in India has been increase quite rapidly since March.
 
 \section*{Country: US and UK}
 
@@ -83,5 +112,44 @@ kable(caption = "Number of deaths in US and UK in May")
  Table \@ref(tab:tab1) shows the number of deaths in US and UK in May.
 
 
+Filter the dataset to present the countries of interest: 
+  - France
+  - Sweden
+```{r filter-countries}
+France <- wcc %>% 
+  filter(countriesAndTerritories == "France") 
+Sweden <- wwc %>%
+  filter(countriesAndTerritories == "Sweden") 
+  
+```
+
+Figure for countries
+```{r glimpse-of-countries}
+glimpse(france_and_sweden)
+```
+
+Table for France
+```{r table-france}
+table_france <- France %>%
+  select(dateRep, cases, deaths) %>%
+  arrange(desc(deaths)) %>%
+  kable(caption = "Table showing the dates with higest number of confirmed cases and deaths for France") %>%
+  kable_styling(bootstrap_options = c("hover", "striped"))
+table_france
+```
+
+
+
+Table for sweden
+```{r table-sweden-deaths-cases}
+table_sweden <- Sweden %>% 
+  select(dateRep, cases, deaths) %>%
+  arrange(desc(deaths)) %>%
+  kable(caption = "Table showing the dates with higest number of confirmed cases and deaths for Sweden") %>%
+  kable_styling(bootstrap_options = c("hover", "striped"))
+table_sweden
+```
+
+ 
 
 
