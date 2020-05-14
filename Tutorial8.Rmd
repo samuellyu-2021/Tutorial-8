@@ -46,7 +46,11 @@ library(bookdown)
 
 ```
 
+```{r}
+#Loading dataset
 
+wwc <- read_csv("data/worldwidecases.csv")
+```
 
 \section*{Country XX1 and YY1"}
 
