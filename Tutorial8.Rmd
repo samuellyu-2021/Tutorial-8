@@ -62,9 +62,11 @@ Filter the dataset to present the countries of interest:
   - France
   - Sweden
 ```{r filter-countries}
-france_and_sweden <- wwc %>%
-  filter(countriesAndTerritories %in% c("France", "Sweden"))
-         
+France <- wcc %>% 
+  filter(countriesAndTerritories == "France") 
+Sweden <- wwc %>%
+  filter(countriesAndTerritories == "Sweden") 
+  
 ```
 
 Figure for countries
@@ -94,6 +96,6 @@ table_sweden <- Sweden %>%
 table_sweden
 ```
 
-Plot most 
+ 
 
 
